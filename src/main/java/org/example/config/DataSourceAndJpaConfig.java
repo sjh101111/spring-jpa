@@ -3,13 +3,10 @@ package org.example.config;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import jakarta.persistence.EntityManagerFactory;
-import org.springframework.boot.autoconfigure.domain.EntityScan;
-import org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaDialect;
@@ -22,12 +19,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 @Configuration
-@EntityScan(basePackages = {"org.example"})
-@EnableJpaRepositories(
-        basePackages = {"org.example.jpa"},
-        entityManagerFactoryRef = "entityManagerFactory",
-        transactionManagerRef = "jpaTransactionManager"
-)
+//@EnableJpaRepositories
+//        (
+//        basePackages = {"org.example.jpa"},
+//        entityManagerFactoryRef = "entityManagerFactory",
+//        transactionManagerRef = "jpaTransactionManager"
+//)
+//@EnableJpaRepositories
 @EnableTransactionManagement
 public class DataSourceAndJpaConfig {
 
@@ -50,7 +48,7 @@ public class DataSourceAndJpaConfig {
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean localContainerEntityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         localContainerEntityManagerFactoryBean.setDataSource(dataSource);
-        localContainerEntityManagerFactoryBean.setPackagesToScan("com.yanolja.supplier.reservation.sync");
+        localContainerEntityManagerFactoryBean.setPackagesToScan("org");
 
         HibernateJpaVendorAdapter hibernateJpaVendorAdapter = new HibernateJpaVendorAdapter();
         localContainerEntityManagerFactoryBean.setJpaVendorAdapter(hibernateJpaVendorAdapter);

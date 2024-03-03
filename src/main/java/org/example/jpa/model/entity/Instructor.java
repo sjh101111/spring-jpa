@@ -9,7 +9,8 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-@Entity(name = "instructor")
+@Entity
+@Table(name = "instructor")
 public class Instructor {
     @Id
     @Column(name = "id", nullable = false)

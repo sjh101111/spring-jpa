@@ -1,5 +1,6 @@
 package org.example.controller;
 
+import org.example.jpa.model.dto.InstructorDto;
 import org.example.jpa.model.entity.Instructor;
 import org.example.service.InstructorService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,7 +21,7 @@ public class InstructorController {
     }
 
     @GetMapping("/instructor/{id}")
-    public Optional<Instructor> getInstructor(@PathVariable Long id) {
+    public Optional<Instructor> getInstructor(@PathVariable("id") Long id) {
         return instructorService.getInstructor(id);
     }
 
@@ -51,6 +52,26 @@ public class InstructorController {
     @PutMapping("/instructor/regist2")
     public void registInstructor(@RequestParam String name, @RequestParam String desc) {
         instructorService.addInstrcutor(name, desc);
+    }
+
+    /**
+     * curl -X GET "http://localhost:8080/instructor/find/querydsl/1"
+     * @param id
+     * @return
+     */
+    @GetMapping("/instructor/find/querydsl/{id}")
+    public Instructor findInstructor(@PathVariable("id") Long id) {
+        return instructorService.getInstructorById(id);
+    }
+
+    /**
+     * curl -X GET "http://localhost:8080/instructor/find/querydsl/projection/1"
+     * @param id
+     * @return
+     */
+    @GetMapping("/instructor/find/querydsl/projection/{id}")
+    public InstructorDto findInstructorDto(@PathVariable("id") Long id) {
+        return instructorService.getInstructorDtoById(id);
     }
 
 }

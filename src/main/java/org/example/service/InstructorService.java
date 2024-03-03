@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.example.jpa.model.dto.InstructorDto;
 import org.example.jpa.model.entity.Instructor;
 import org.example.jpa.repository.InstructorCustomRepository;
 import org.example.jpa.repository.InstructorRepository;
@@ -45,4 +46,11 @@ public class InstructorService {
         instructorCustomRepository.saveInstructor(name, desc);
     }
 
+    public Instructor getInstructorById(Long id) {
+        return instructorCustomRepository.findInstructorWithQuerydsl(id);
+    }
+
+    public InstructorDto getInstructorDtoById(Long id) {
+        return instructorCustomRepository.findInstructorDtoWithQuerydsl(id);
+    }
 }
