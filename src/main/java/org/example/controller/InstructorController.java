@@ -36,22 +36,24 @@ public class InstructorController {
      * curl -X PUT -G --data-urlencode "name=김영수" --data-urlencode "age=28" http://localhost:8080/student/regist
      *
      * requestBody
-     * curl -X PUT "http://localhost:8080/student/regist" -d '{ "name":"김영수", "age":"28"}'
+     * curl -H 'Content-type: application/json' -X PUT "http://localhost:8080/instructor/regist" -d '{ "name":"이강사", "desc":"testtest"}'
      * @param params
      */
     @PutMapping("/instructor/regist")
-    public void registInstructor(@RequestParam Map<String, Object> params) {
+    public void registInstructor(@RequestBody Map<String, Object> params) {
         instructorService.saveInstructor(params);
     }
 
     /**
      * curl -X PUT -G --data-urlencode "name=JPA Teacher" --data-urlencode "desc=lets do it" http://localhost:8080/instructor/regist2
-     * @param name
-     * @param desc
+     *
+     * curl -H 'Content-type: application/json' -X PUT "http://localhost:8080/instructor/regist2" -d '{ "name":"박강사", "desc":"testtest"}'
+     * curl -H 'Content-type: application/json' -X PUT "http://localhost:8080/instructor/regist2" -d '{ "name":"고강사", "desc":"testtest"}'
+     * @param params
      */
     @PutMapping("/instructor/regist2")
-    public void registInstructor(@RequestParam String name, @RequestParam String desc) {
-        instructorService.addInstrcutor(name, desc);
+    public void registInstructor2(@RequestBody Map<String, Object> params) {
+        instructorService.addInstrcutor(params);
     }
 
     /**

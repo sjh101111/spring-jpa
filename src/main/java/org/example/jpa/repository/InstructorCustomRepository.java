@@ -9,6 +9,7 @@ import org.example.jpa.model.dto.InstructorDto;
 import org.example.jpa.model.entity.Instructor;
 import org.example.jpa.model.entity.QInstructor;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -17,16 +18,13 @@ public class InstructorCustomRepository {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Transactional
     public void saveInstructor(String name, String desc) {
-//        entityManager.getTransaction().begin();
-
         Instructor instructor = new Instructor();
         instructor.setName(name);
         instructor.setDesc(desc);
 
         entityManager.persist(instructor);
-        //because of @EnableTrasactionManagement
-//        entityManager.getTransaction().commit();
     }
 
     public Instructor findInstructorWithQuerydsl(Long id) {

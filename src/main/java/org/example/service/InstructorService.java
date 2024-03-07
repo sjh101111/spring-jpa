@@ -1,5 +1,6 @@
 package org.example.service;
 
+import org.apache.commons.collections4.MapUtils;
 import org.example.jpa.model.dto.InstructorDto;
 import org.example.jpa.model.entity.Instructor;
 import org.example.jpa.repository.InstructorCustomRepository;
@@ -31,9 +32,9 @@ public class InstructorService {
     public Instructor saveInstructor(Map<String, Object> params) {
         Instructor instructor = new Instructor();
 
-        instructor.setName("Sam Altman");
-        instructor.setDesc("hi I'm Sam Altman from open ai ");
-//        instructor.setLeft(false);
+        instructor.setName(MapUtils.getString(params, "name"));
+        instructor.setDesc(MapUtils.getString(params, "desc"));
+        instructor.setLeft(MapUtils.getBoolean(params, "left", false));
 
         instructorRepository.save(instructor);
 
@@ -42,7 +43,9 @@ public class InstructorService {
 
     @Autowired
     private InstructorCustomRepository instructorCustomRepository;
-    public void addInstrcutor(String name, String desc) {
+    public void addInstrcutor(Map<String, Object> params) {
+        String name = MapUtils.getString(params, "name");
+        String desc = MapUtils.getString(params, "desc");
         instructorCustomRepository.saveInstructor(name, desc);
     }
 
