@@ -25,7 +25,7 @@ import java.util.Map;
 //        entityManagerFactoryRef = "entityManagerFactory",
 //        transactionManagerRef = "jpaTransactionManager"
 //)
-//@EnableTransactionManagement
+@EnableTransactionManagement
 public class DataSourceAndJpaConfig {
 
     @Bean(destroyMethod = "close")
@@ -63,9 +63,9 @@ public class DataSourceAndJpaConfig {
         return props;
     }
 
-    @Bean
-    public PlatformTransactionManager jpaTransactionManager(EntityManagerFactory entityManagerFactory) {
-        return new JpaTransactionManager(entityManagerFactory);
-    }
+//    @Bean
+//    public PlatformTransactionManager jpaTransactionManager(EntityManagerFactory entityManagerFactory) {
+//        return new JpaTransactionManager(entityManagerFactory);
+//    }
 
 }
